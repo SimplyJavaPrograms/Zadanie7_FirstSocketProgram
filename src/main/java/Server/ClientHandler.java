@@ -32,19 +32,26 @@ public class ClientHandler implements Runnable {
         while (socket.isConnected()) {
             try {
                 messageFromClient = bufferedReader.readLine();
-                sendMessage(messageFromClient);
+                System.out.println("New task request from user: " + this.clientUsername);
+                postAlert(messageFromClient);
             } catch (IOException e) {
                 closeEverything();
                 break;
             }
         }
     }
-    public void postAlert(String messageToSend){
-        new PostAlert(this, messageToSend);
 
+    public void postAlert(String messageToSend) {
+        try {
+            PostAlert alert = new PostAlert(this, messageToSend);
+            alert.parseMessage();
+            alert.post();
+        } catch (Exception e) {
+            sendMessage("Failure adding notification. Check the syntax");
+        }
     }
 
-    public void sendMessage(String msgContent){
+    public void sendMessage(String msgContent) {
         try {
             bufferedWriter.write(msgContent);
             bufferedWriter.newLine();
