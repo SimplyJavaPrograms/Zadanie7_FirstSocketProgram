@@ -1,2 +1,5 @@
-.idea/
+.idea/*
 target/
+.gitignore.bak
+.idea/misc.xml
+/.idea/

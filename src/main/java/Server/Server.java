@@ -12,11 +12,6 @@ public class Server {
         this.serverSocket = serverSocket;
     }
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(2001);
-        Server server = new Server(serverSocket);
-        server.startServer();
-    }
 
     public void startServer() {
         try {
