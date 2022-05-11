@@ -1,5 +1,3 @@
-package Server;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;

@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Client {
 
     private Socket socket;
@@ -22,18 +24,7 @@ public class Client {
         }
     }
 
-    public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your username for the group chat: ");
-        String username = scanner.nextLine();
-
-        Socket socket = new Socket("localhost", 2001);
-        Client client = new Client(socket, username);
-
-        client.listenForMessage();
-        client.sendMessage();
-    }
 
     public void sendMessage() {
         try {
@@ -41,8 +32,10 @@ public class Client {
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
+            System.out.println("Please put new task with format: \"Int Stirng\":");
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
+
                 String messageToSend = scanner.nextLine();
                 bufferedWriter.write(messageToSend);
                 bufferedWriter.newLine();
@@ -64,6 +57,8 @@ public class Client {
                         System.out.println(msgFromGroupChat);
                     } catch (IOException e) {
                         closeEverything(socket, bufferedReader, bufferedWriter);
+                        System.out.printf("Connection has been lost");
+                        exit(1);
                     }
                 }
             }
@@ -84,5 +79,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.printf("Connection has been lost");
+        exit(1);
     }
 }

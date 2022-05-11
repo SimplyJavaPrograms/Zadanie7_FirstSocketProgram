@@ -20,6 +20,7 @@ public class ClientHandler implements Runnable {
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             this.clientUsername = bufferedReader.readLine();
+            System.out.println("New user \"" + clientUsername + "\" joined.");
             clientHandlers.add(this);
         } catch (IOException e) {
             closeEverything();
@@ -32,6 +33,8 @@ public class ClientHandler implements Runnable {
         while (socket.isConnected()) {
             try {
                 messageFromClient = bufferedReader.readLine();
+                if(messageFromClient == "")
+                    continue;
                 System.out.println("New task request from user: " + this.clientUsername);
                 postAlert(messageFromClient);
             } catch (IOException e) {
