@@ -22,4 +22,3 @@ Client:
   
   - could send new notification request to the server
 
- 
