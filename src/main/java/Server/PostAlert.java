@@ -36,6 +36,7 @@ public class PostAlert {
         timer.schedule(new TimerTask() {
             public void run() {
                 clientHandler.sendMessage(messageContent);
+                System.out.println("task for " + clientHandler.getClientUsername() + "has been sent");
                 timer.cancel();
             }
         }, messagedelay);

@@ -11,6 +11,11 @@ public class ClientHandler implements Runnable {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+
+    public String getClientUsername() {
+        return clientUsername;
+    }
+
     private String clientUsername;
 
     public ClientHandler(Socket socket) {
